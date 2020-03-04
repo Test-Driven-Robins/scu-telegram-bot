@@ -1,0 +1,29 @@
+{
+  "name": "scu-telegram-bot",
+  "version": "1.0.0",
+  "description": "## Descripción",
+  "main": "dist/index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build && node dist/index.js",
+    "build": "tsc --outfile dist/index.js src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Test-Driven-Robins/scu-telegram-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Test-Driven-Robins/scu-telegram-bot/issues"
+  },
+  "homepage": "https://github.com/Test-Driven-Robins/scu-telegram-bot#readme",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
