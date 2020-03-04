@@ -1,7 +1,7 @@
 {
   "name": "scu-telegram-bot",
   "version": "1.0.0",
-  "description": "## Descripción",
+  "description": "Bot para consultar el menu del comedor universitario",
   "main": "dist/index.js",
   "directories": {
     "doc": "docs",
