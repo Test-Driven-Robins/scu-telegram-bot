@@ -1,3 +1,3 @@
 # Historia de Usuario 6
 
-El usuario puede modificar su menú y su comedor definido.
+El usuario puede modificar su menú y su comedor establecido de antemano.
