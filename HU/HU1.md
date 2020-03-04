@@ -1,3 +1,3 @@
 # Historia de Usuario 1
 
-Se permite consultar que hay hoy en el comedor del PTS
+Yo como estudiante o docente del PTS, necesito definir mi comedor y que se guarde para las próximas consultas.
