@@ -1,1 +1,3 @@
-console.log("Hello");
+function httpRequest(url: string): string {
+  return "";
+}
