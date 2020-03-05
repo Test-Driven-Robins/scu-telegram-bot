@@ -1,0 +1,5 @@
+{
+  "lenguaje": "Typescript",
+  "build": "package.json",
+  "clase": "src/controllers/SCUController.ts"
+}
