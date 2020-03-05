@@ -31,3 +31,7 @@ class DayMenu {
     this._fuenteNuevaMenu = menus;
   }
 }
+
+class MenuNotFound extends Error {}
+
+export default DayMenu;
