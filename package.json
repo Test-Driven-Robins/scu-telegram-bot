@@ -25,5 +25,8 @@
   "homepage": "https://github.com/Test-Driven-Robins/scu-telegram-bot#readme",
   "devDependencies": {
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
   }
 }
