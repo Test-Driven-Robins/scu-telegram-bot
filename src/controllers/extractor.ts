@@ -1,24 +1,12 @@
-import axios from "axios";
+import fetch from "node-fetch";
 
-export async function httpRequest(
-  url: string,
-  n: number = 3,
-  client: Function = axios,
-  options = {
-    method: "get",
-    timeout: 500,
-    responseType: "document"
+export async function httpRequest(url: string) {
+  try {
+    const res = await fetch(url);
+    return res;
+  } catch (err) {
+    throw new SCUPageNotAvailable(err.message);
   }
-) {
-  let error;
-  for (let i = 0; i < n; i++) {
-    try {
-      return await client({ ...options, url: url });
-    } catch (err) {
-      error = err;
-    }
-  }
-  throw new SCUPageNotAvailable(error.message);
 }
 
 class SCUPageNotAvailable extends Error {}

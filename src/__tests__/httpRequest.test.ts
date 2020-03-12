@@ -1,7 +1,7 @@
-const extractor = require("../controllers/extractor");
+import httpRequest from "../controllers/extractor";
 
-test("sumar 1 + 2 es igual a 3", () => {
-  //   expect(extractor("https://google.es")).toBe("Dddd");
-
-  console.log(extractor("https://google.es"));
+test("Extrator fetches google", () => {
+  httpRequest("http://www.google.es").then(res => {
+    expect(res.status).toBe(200);
+  });
 });
