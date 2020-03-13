@@ -1,5 +1,7 @@
 # SCU Telegram Bot
 
+[![Build Status](https://travis-ci.org/Test-Driven-Robins/scu-telegram-bot.svg?branch=master)](https://travis-ci.org/Test-Driven-Robins/scu-telegram-bot)
+
 ## Descripción
 
 Bot de telegram para consultar el menú de los comedores de la Universidad de Granada
