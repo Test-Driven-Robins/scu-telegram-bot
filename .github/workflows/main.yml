@@ -1,0 +1,21 @@
+name: Pasa tests de cobertura
+on: [push]
+
+jobs:
+  build:
+    name: Cobertura
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Instalación general
+        run: npm install
+      - name: Instala tests y cobertura
+        run: sudo npm install -g jest nyc codecov
+      - name: Ejecuta tests de cobertura
+        run: nyc jest --coverage
+      - name: Crea los informes
+        run: nyc report --reporter=json > coverage/coverage.json
+      - name: Sube los tests
+        run: codecov
