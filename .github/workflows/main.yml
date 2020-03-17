@@ -18,4 +18,4 @@ jobs:
       - name: Crea los informes
         run: nyc report --reporter=json > coverage/coverage.json
       - name: Sube los tests
-        run: codecov -t $CODECOV_TOKEN
+        run: codecov -t ${{ secrets.CODECOV_TOKEN }}
