@@ -2,13 +2,13 @@ import fetch from "node-fetch";
 
 export async function httpRequest(url: string) {
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { timeout: 1000 });
     return res;
   } catch (err) {
-    throw new SCUPageNotAvailable(err.message);
+    throw new PageNotAvailable(err.message);
   }
 }
 
-class SCUPageNotAvailable extends Error {}
+class PageNotAvailable extends Error {}
 
 export default httpRequest;
