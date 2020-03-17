@@ -1,6 +1,7 @@
 # SCU Telegram Bot
 
-[![Build Status](https://travis-ci.org/Test-Driven-Robins/scu-telegram-bot.svg?branch=master)](https://travis-ci.org/Test-Driven-Robins/scu-telegram-bot)
+[![Build Status](https://travis-ci.org/Test-Driven-Robins/scu-telegram-bot.svg?branch=master)](https://travis-ci.org/Test-Driven-Robins/scu-telegram-bot)[![codecov](https://codecov.io/gh/Test-Driven-Robins/scu-telegram-bot/branch/master/graph/badge.svg)](https://codecov.io/gh/Test-Driven-Robins/scu-telegram-bot)
+
 
 ## Descripción
 
