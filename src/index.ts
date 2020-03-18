@@ -9,4 +9,20 @@ const bot = new Telegraf(token);
 
 bot.start(ctx => ctx.reply("Hello world"));
 
+bot.command("hoy", ctx => ctx.reply("Menú de hoy"));
+bot.command("mañana", ctx => ctx.reply("Menú de mañana"));
+
+const WEEKDAYS = [
+  "lunes",
+  "martes",
+  "miercoles",
+  "jueves",
+  "viernes",
+  "sabado"
+];
+
+WEEKDAYS.map(day => {
+  bot.command(day, ctx => ctx.reply(`Menú de ${day}`));
+});
+
 bot.launch();
