@@ -4,6 +4,8 @@ if (process.env.NODE_ENV != "production") {
 }
 
 import { Weekdays, SCUController } from "./controllers/SCUController";
+import { SCUService } from "./controllers/SCUService.interface";
+import { JsonStorage } from "./services/JsonStorage.service";
 
 const token: string = process.env.BOT_TOKEN as string;
 
@@ -11,7 +13,8 @@ const bot = new Telegraf(token);
 
 bot.start(ctx => ctx.reply("Hello world"));
 
-const scuController: SCUController = new SCUController();
+const jsonStorage: SCUService = new JsonStorage();
+const scuController: SCUController = new SCUController(jsonStorage);
 
 bot.command("hoy", async ctx =>
   ctx.reply((await scuController.getToday()).readable())

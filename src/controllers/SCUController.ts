@@ -1,5 +1,5 @@
 import DayMenu from "../models/DayMenu";
-import fs from "fs";
+import { SCUService } from "./SCUService.interface";
 
 export enum Weekdays {
   Monday,
@@ -12,28 +12,14 @@ export enum Weekdays {
 }
 
 export class SCUController {
-  private static JSON_FILE = "menus.json";
-  private menus: DayMenu[];
+  constructor(private readonly scuService: SCUService) {}
 
-  constructor() {
-    try {
-      this.readMenusFromFile();
-    } catch (err) {
-      console.error(`Could not read from ${SCUController.JSON_FILE}`);
-      throw err;
-    }
-  }
-
-  async getDayMenu(day: Weekdays): Promise<DayMenu> {
-    const date: Date = this.getDateFromWeekday(day);
-    const dayMenu: DayMenu | undefined = this.searchDayMenu(date);
-
-    if (dayMenu == undefined) {
-      /*
-      Extractor
-      */
-      throw new Error();
-    } else return dayMenu;
+  async getDayMenu(weekday: Weekdays): Promise<DayMenu> {
+    const date: Date = this.getDateFromWeekday(weekday);
+    const day: number = date.getDay();
+    const month: number = date.getMonth();
+    const year: number = date.getFullYear();
+    return this.scuService.getDayMenu(day, month, year);
   }
   async getToday(): Promise<DayMenu> {
     const weekDay: Weekdays = new Date().getDay();
@@ -45,15 +31,6 @@ export class SCUController {
     tomorrow.setDate(now.getDay() + 1);
     const weekDay: Weekdays = tomorrow.getDay();
     return this.getDayMenu(weekDay);
-  }
-
-  private searchDayMenu(date: Date): DayMenu | undefined {
-    const day = date.getDay();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    return this.menus.find((menu: DayMenu) => {
-      return menu.day == day && menu.month == month && menu.year == year;
-    });
   }
 
   private getDateFromWeekday(day: Weekdays) {
@@ -68,15 +45,4 @@ export class SCUController {
 
     return toReturn;
   }
-
-  private readMenusFromFile() {
-    try {
-      const data = fs.readFileSync(SCUController.JSON_FILE);
-      this.menus = JSON.parse(data.toString());
-    } catch (err) {
-      throw new JSONReadError();
-    }
-  }
 }
-
-class JSONReadError extends Error {}
