@@ -1,5 +1,4 @@
 import Dish from "./Dish";
-import MenuTypes from "./MenuTypes";
 
 class Menu {
   first: Dish;
@@ -26,6 +25,11 @@ class Menu {
       ${this.drink}
     `;
   }
+}
+
+enum MenuTypes {
+  Normal,
+  Vegetarian
 }
 
 export default Menu;
