@@ -3,7 +3,7 @@ if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
 
-import { WEEKDAYS, SCUController } from "./controllers/SCUController";
+import { Weekdays, SCUController } from "./controllers/SCUController";
 
 const token: string = process.env.BOT_TOKEN as string;
 
@@ -18,7 +18,7 @@ bot.command("hoy", ctx => ctx.reply(scuController.getToday().toString()));
 bot.command("mañana", ctx => ctx.reply(scuController.getTomorrow().toString()));
 
 bot.command("lunes", ctx =>
-  ctx.reply(scuController.getDayMenu(WEEKDAYS.Monday).toString())
+  ctx.reply(scuController.getDayMenu(Weekdays.Monday).toString())
 );
 
 bot.launch();
