@@ -1,8 +1,16 @@
-import Allergens from "./Allergens";
-
-interface Dish {
+class Dish {
   name: string;
-  allergens: Allergens[];
+  allergens: string[];
+
+  readable(): string {
+    let toReturn = `
+    ${name}
+    `;
+
+    this.allergens.forEach(allergen => (toReturn += `${allergen}\n`));
+
+    return toReturn;
+  }
 }
 
 export default Dish;
