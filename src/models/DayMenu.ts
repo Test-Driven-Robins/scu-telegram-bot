@@ -1,11 +1,13 @@
 import Menu from "./Menu";
 
 class DayMenu {
-  ptsMenu: Menu[];
-  fuenteNuevaMenu: Menu[];
-  day: number;
-  month: number;
-  year: number;
+  constructor(
+    readonly ptsMenu: Menu[],
+    readonly fuenteNuevaMenu: Menu[],
+    readonly day: number,
+    readonly month: number,
+    readonly year: number
+  ) {}
 
   readable(): string {
     let toReturn: string = `${this.day}/${this.month}/${this.year}`;

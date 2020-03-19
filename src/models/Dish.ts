@@ -1,13 +1,13 @@
 class Dish {
-  name: string;
-  allergens: string[];
+  constructor(readonly name: string, readonly allergens?: string[]) {}
 
   readable(): string {
     let toReturn = `
     ${name}
     `;
 
-    this.allergens.forEach(allergen => (toReturn += `\t${allergen}\n`));
+    if (this.allergens)
+      this.allergens.forEach(allergen => (toReturn += `\t${allergen}\n`));
 
     return toReturn;
   }
