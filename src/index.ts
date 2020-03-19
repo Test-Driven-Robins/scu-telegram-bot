@@ -3,26 +3,22 @@ if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
 
+import { WEEKDAYS, SCUController } from "./controllers/SCUController";
+
 const token: string = process.env.BOT_TOKEN as string;
 
 const bot = new Telegraf(token);
 
 bot.start(ctx => ctx.reply("Hello world"));
 
-bot.command("hoy", ctx => ctx.reply("Menú de hoy"));
-bot.command("mañana", ctx => ctx.reply("Menú de mañana"));
+const scuController: SCUController = new SCUController();
 
-const WEEKDAYS = [
-  "lunes",
-  "martes",
-  "miercoles",
-  "jueves",
-  "viernes",
-  "sabado"
-];
+bot.command("hoy", ctx => ctx.reply(scuController.getToday().toString()));
 
-WEEKDAYS.map(day => {
-  bot.command(day, ctx => ctx.reply(`Menú de ${day}`));
-});
+bot.command("mañana", ctx => ctx.reply(scuController.getTomorrow().toString()));
+
+bot.command("lunes", ctx =>
+  ctx.reply(scuController.getDayMenu(WEEKDAYS.Monday).toString())
+);
 
 bot.launch();

@@ -1,7 +1,7 @@
 import Dish from "./Dish";
 import MenuTypes from "./MenuTypes";
 
-class Menu {
+interface Menu {
   first: Dish;
   second: Dish;
   garnish: Dish;

@@ -1,7 +1,6 @@
-import Menu from "../models/Menu";
-import MenuTypes from "../models/MenuTypes";
+import DayMenu from "../models/DayMenu";
 
-enum Days {
+export enum WEEKDAYS {
   Monday,
   Tuesday,
   Wednesday,
@@ -10,24 +9,16 @@ enum Days {
   Saturday
 }
 
-class SCUController {
-  queryDailyMenu(place: string): Menu {
-    return new Menu();
+export class SCUController {
+  async getDayMenu(day: WEEKDAYS): Promise<DayMenu> {
+    throw new Error();
   }
-
-  queryMenuFromDate(date: Date, place: string): Menu {
-    return new Menu();
+  async getToday(): Promise<DayMenu> {
+    throw new Error();
   }
-
-  queryMenu(day: Date, place: string): Menu {
-    return new Menu();
+  async getTomorrow(): Promise<DayMenu> {
+    throw new Error();
   }
-
-  dailyReminder() {}
-
-  setPreferences(name: string, menuType: MenuTypes) {}
 }
 
 class MenuNotExist extends Error {}
-
-export default SCUController;
