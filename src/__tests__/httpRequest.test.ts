@@ -1,4 +1,4 @@
-import httpRequest from "../controllers/extractor";
+import { httpRequest } from "../controllers/extractor";
 
 test("Extrator fetches google", () => {
   return httpRequest("http://www.google.es").then(res => {
