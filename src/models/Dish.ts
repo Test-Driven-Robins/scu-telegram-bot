@@ -3,7 +3,7 @@ class Dish {
 
   readable(): string {
     let toReturn = `
-    ${name}
+    ${this.name}
     `;
 
     if (this.allergens)
