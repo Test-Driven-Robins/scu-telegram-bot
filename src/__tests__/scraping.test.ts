@@ -23,7 +23,7 @@ test('Get day menu from scu page', () => {
     ),
   ];
   return getMenus(URL, 'lunes').then(res => {
-    expect(res).toMatchObject(new DayMenu([], menus, 1, 1, 1));
+    expect(res).toMatchObject(new DayMenu([], menus, 8, 0, 2018));
   });
 });
 
@@ -62,7 +62,7 @@ test('Build day menu', () => {
   ];
 
   expect(buildDayMenuFromRawData(rawData)).toMatchObject(
-    new DayMenu([], menus, 1, 1, 1),
+    new DayMenu([], menus, 8, 0, 2018),
   );
 });
 
