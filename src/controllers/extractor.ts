@@ -13,6 +13,17 @@ export async function httpRequest(url: string) {
   }
 }
 
+export async function getAllDaysAvailable(url: string): Promise<DayMenu[]>{
+  const promises = []
+  promises.push(getMenus(url, "LUNES"))
+  promises.push(getMenus(url, "MARTES"))
+  promises.push(getMenus(url, "MIÉRCOLES"))
+  promises.push(getMenus(url, "JUEVES"))
+  promises.push(getMenus(url, "VIERNES"))
+  promises.push(getMenus(url, "SÁBADO"))
+
+  return Promise.all(promises)
+}
 export async function getMenus(url: string, day: string): Promise<DayMenu> {
   let html: string = await (await httpRequest(url)).text();
   let rawData: string[] = scrapeMenus(html);
