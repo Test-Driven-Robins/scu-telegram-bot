@@ -10,7 +10,10 @@ export class JsonStorage implements SCUService {
   private static REFRESH_INTERVAL_MINUTES = 1;
 
   private menus: Map<string, DayMenu>;
-  constructor(private readonly getAllDaysAvailable: Extractor) {
+  constructor(
+    private readonly getAllDaysAvailable: Extractor,
+    private readonly refreshDataPeriodically: boolean = true,
+  ) {
     try {
       this.initializeService();
     } catch (err) {
@@ -31,10 +34,12 @@ export class JsonStorage implements SCUService {
 
   private async initializeService() {
     await this.readMenusFromFile();
-    setInterval(async () => {
-      await this.refreshFromTheWeb();
-      await this.writeMenusToFile();
-    }, JsonStorage.REFRESH_INTERVAL_MINUTES * 60 * 1000);
+    if (this.refreshDataPeriodically) {
+      setInterval(async () => {
+        await this.refreshFromTheWeb();
+        await this.writeMenusToFile();
+      }, JsonStorage.REFRESH_INTERVAL_MINUTES * 60 * 1000);
+    }
   }
 
   private async refreshFromTheWeb() {

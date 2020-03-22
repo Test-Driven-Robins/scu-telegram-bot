@@ -22,7 +22,7 @@ const getAllDaysAvailable = jest.fn(async (url: string) => {
   return [new DayMenu([menu], [menu], 10, 2, 2020)];
 });
 
-const jsonService = new JsonStorage(getAllDaysAvailable);
+const jsonService = new JsonStorage(getAllDaysAvailable, false);
 
 describe('jsonStorageService tests', () => {
   it('should find a day that exist', async () => {

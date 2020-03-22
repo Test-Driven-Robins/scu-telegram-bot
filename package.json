@@ -8,10 +8,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest --forceExit",
+    "test": "jest",
     "start": "npm run build && node dist/index.js",
     "build": "tsc",
-    "test:cov": "jest --forceExit --coverage"
+    "test:cov": "jest --coverage"
   },
   "repository": {
     "type": "git",
