@@ -1,14 +1,14 @@
-import DayMenu from "../models/DayMenu";
-import { SCUService } from "./SCUService.interface";
+import DayMenu from '../models/DayMenu';
+import { SCUService } from './SCUService.interface';
 
 export enum Weekdays {
+  Sunday,
   Monday,
   Tuesday,
   Wednesday,
   Thursday,
   Friday,
   Saturday,
-  Sunday
 }
 
 export class SCUController {
@@ -22,27 +22,28 @@ export class SCUController {
     return this.scuService.getDayMenu(day, month, year);
   }
   async getToday(): Promise<DayMenu> {
-    const weekDay: Weekdays = new Date().getDay();
-    return this.getDayMenu(weekDay);
+    const today: Weekdays = this.getTodayWeekday();
+    return this.getDayMenu(today);
   }
   async getTomorrow(): Promise<DayMenu> {
-    const now = new Date();
-    const tomorrow = new Date();
-    tomorrow.setDate(now.getDay() + 1);
-    const weekDay: Weekdays = tomorrow.getDay();
-    return this.getDayMenu(weekDay);
+    const today: Weekdays = this.getTodayWeekday();
+    return this.getDayMenu(today + (1 % 7));
   }
 
-  private getDateFromWeekday(day: Weekdays) {
-    const now = new Date();
-    const today: Weekdays = now.getUTCDay();
+  private getDateFromWeekday(day: Weekdays): Date {
+    const today: Weekdays = this.getTodayWeekday();
 
     const increment: number = day - today;
 
     const toReturn = new Date();
 
-    toReturn.setDate(now.getDate() + increment);
+    toReturn.setDate(toReturn.getDate() + increment);
 
     return toReturn;
+  }
+
+  private getTodayWeekday(): Weekdays {
+    const now = new Date();
+    return now.getUTCDay();
   }
 }
