@@ -73,18 +73,18 @@ export function parseDate(rawData: string) {
     .slice(1)
     .filter(Boolean);
   let numberFromMonth = dateInString[1]
-    .replace('ENERO', '0')
-    .replace('FEBRERO', '1')
-    .replace('MARZO', '2')
-    .replace('ABRIL', '3')
-    .replace('MAYO', '4')
-    .replace('JUNIO', '5')
-    .replace('JULIO', '6')
-    .replace('AGOSTO', '7')
+    .replace('ENERO', '1')
+    .replace('FEBRERO', '2')
+    .replace('MARZO', '3')
+    .replace('ABRIL', '4')
+    .replace('MAYO', '5')
+    .replace('JUNIO', '6')
+    .replace('JULIO', '7')
+    .replace('AGOSTO', '8')
     .replace('SEPTIEMBRE', '8')
-    .replace('OCTUBRE', '9')
-    .replace('NOVIEMBRE', '10')
-    .replace('DICIEMBRE', '11');
+    .replace('OCTUBRE', '10')
+    .replace('NOVIEMBRE', '11')
+    .replace('DICIEMBRE', '12');
   return {
     year: parseInt(dateInString[2]),
     month: parseInt(numberFromMonth),
