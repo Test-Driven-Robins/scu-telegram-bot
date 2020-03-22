@@ -11,6 +11,7 @@ import {
 } from '../controllers/extractor';
 
 const URL = 'https://web.archive.org/web/20180110215431/http://scu.ugr.es/';
+jest.setTimeout(30000);
 
 test('Get day menu from scu page', () => {
   let menus = [
@@ -23,7 +24,7 @@ test('Get day menu from scu page', () => {
     ),
   ];
   return getMenus(URL, 'lunes').then(res => {
-    expect(res).toMatchObject(new DayMenu([], menus, 8, 0, 2018));
+    expect(res).toMatchObject(new DayMenu([], menus, 8, 1, 2018));
   });
 });
 
@@ -62,7 +63,7 @@ test('Build day menu', () => {
   ];
 
   expect(buildDayMenuFromRawData(rawData)).toMatchObject(
-    new DayMenu([], menus, 8, 0, 2018),
+    new DayMenu([], menus, 8, 1, 2018),
   );
 });
 

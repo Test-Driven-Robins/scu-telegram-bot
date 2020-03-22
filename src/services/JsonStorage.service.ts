@@ -1,7 +1,7 @@
 import { SCUService } from '../controllers/SCUService.interface';
 import fs from 'fs';
 import DayMenu from '../models/DayMenu';
-import { getAllDaysAvailable } from '../controllers/extractor';
+import { Extractor } from '../controllers/extractor.interface';
 
 export class JsonStorage implements SCUService {
   private static JSON_FILE = 'menus.json';
@@ -10,7 +10,7 @@ export class JsonStorage implements SCUService {
   private static REFRESH_INTERVAL_MINUTES = 1;
 
   private menus: Map<string, DayMenu>;
-  constructor() {
+  constructor(private readonly getAllDaysAvailable: Extractor) {
     try {
       this.initializeService();
     } catch (err) {
@@ -39,7 +39,9 @@ export class JsonStorage implements SCUService {
 
   private async refreshFromTheWeb() {
     try {
-      const dayMenus: DayMenu[] = await getAllDaysAvailable(JsonStorage.URL);
+      const dayMenus: DayMenu[] = await this.getAllDaysAvailable(
+        JsonStorage.URL,
+      );
       this.menus = this.menuArrayToMap(dayMenus);
     } catch (err) {
       throw new RefreshError();
@@ -89,20 +91,24 @@ export class JsonStorage implements SCUService {
 class JSONReadError extends Error {
   constructor() {
     super();
+    this.name = 'JSONReadError';
     this.message = 'Could not read from the menu file';
   }
 }
 
-class RefreshError extends Error {
+export class RefreshError extends Error {
   constructor() {
     super();
+    this.name = 'RefreshError';
     this.message = 'Could not refresh from the extractor';
+    Object.setPrototypeOf(this, RefreshError.prototype);
   }
 }
 
 class JSONWriteError extends Error {
   constructor() {
     super();
+    this.name = 'JSONWriteError';
     this.message = 'Could not write the menus in memory to a file';
   }
 }
@@ -110,13 +116,17 @@ class JSONWriteError extends Error {
 class InitializationError extends Error {
   constructor() {
     super();
-    this.message = 'Could not initializate the service';
+    this.name = 'InitializationError';
+    this.message = 'Could not initialize the service';
   }
 }
 
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
   constructor() {
     super();
+    this.name = 'NotFoundError';
     this.message = 'Menu of the date asked doesnt exist in our database';
+
+    Object.setPrototypeOf(this, NotFoundError.prototype);
   }
 }
