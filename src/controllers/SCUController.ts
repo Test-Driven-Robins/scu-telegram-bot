@@ -19,7 +19,11 @@ export class SCUController {
     const day: number = date.getDay();
     const month: number = date.getMonth();
     const year: number = date.getFullYear();
-    return this.scuService.getDayMenu(day, month, year);
+    try {
+      return await this.scuService.getDayMenu(day, month, year);
+    } catch (err) {
+      throw new CouldNotFindDayMenu();
+    }
   }
   async getToday(): Promise<DayMenu> {
     const today: Weekdays = this.getTodayWeekday();
@@ -45,5 +49,12 @@ export class SCUController {
   private getTodayWeekday(): Weekdays {
     const now = new Date();
     return now.getUTCDay();
+  }
+}
+
+class CouldNotFindDayMenu extends Error {
+  constructor() {
+    super();
+    this.message = "That day doesn't exist in our databse";
   }
 }
