@@ -71,15 +71,4 @@ describe('scrapping tests', () => {
       ),
     );
   });
-
-  test('Get menu from html table', () => {
-    let expected_menus: string[] = fs
-      .readFileSync('./src/__tests__/resources/expected_menu.txt', 'utf8')
-      .split('\n');
-    httpRequest(URL)
-      .then(res => res.text())
-      .then(html => {
-        expect(scrapeMenus(html)).toStrictEqual(expected_menus);
-      });
-  });
 });
