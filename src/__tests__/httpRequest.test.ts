@@ -2,18 +2,13 @@ import { httpRequest } from '../controllers/extractor';
 
 jest.setTimeout(30000);
 
-test('Extrator fetches google', () => {
-  return httpRequest('http://www.google.es').then(res => {
+describe('httpRequest tests', () => {
+  it('Extrator fetches google', async () => {
+    const res = await httpRequest('http://www.google.es');
     expect(res.status).toBe(200);
   });
-});
 
-test('Extrator throws if PageNotAvailable if it has to', () => {
-  return httpRequest('http://www.lasdkfjlk.es')
-    .then(() => {
-      expect(true).toBe(false);
-    })
-    .catch(err => {
-      expect(err).toBeDefined();
-    });
+  it('Extrator throws if PageNotAvailable if it has to', async () => {
+    await expect(httpRequest('http://www.lasdkfjlk.es')).rejects.toThrow();
+  });
 });

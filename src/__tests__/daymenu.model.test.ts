@@ -16,12 +16,14 @@ const menu = new Menu(
 
 const dayMenu = new DayMenu([menu], [menu], 10, 2, 2020);
 
-it('should contain the menu readable in his readable', () => {
-  const menu = dayMenu.fuenteNuevaMenu[0];
-  expect(dayMenu.readable()).toContain(menu.readable());
-});
+describe('dayMenu tests', () => {
+  it('should contain the menu readable in his readable', () => {
+    const menu = dayMenu.fuenteNuevaMenu[0];
+    expect(dayMenu.readable()).toContain(menu.readable());
+  });
 
-it('should contain the date in his readable', () => {
-  const dateString = `${dayMenu.day}/${dayMenu.month}/${dayMenu.year}`;
-  expect(dayMenu.readable()).toContain(dateString);
+  it('should contain the date in his readable', () => {
+    const dateString = `${dayMenu.day}/${dayMenu.month}/${dayMenu.year}`;
+    expect(dayMenu.readable()).toContain(dateString);
+  });
 });
