@@ -18,3 +18,11 @@ Bot de telegram para consultar el menú de los comedores de la Universidad de Gr
 - [Historias de usuario](/HU)
 - [Comedores de la UGR](http://scu.ugr.es/)
 - [La API de bots de Telegram](https://core.telegram.org/bots)
+
+## Contribuidores
+
+| Nick GitHub     | Perfil LinkedIn                                                        |
+|-----------------|------------------------------------------------------------------------|
+| Torchu          | https://www.linkedin.com/in/victorcabritagomez/                        |
+| antoniogamiz    | https://www.linkedin.com/in/antonio-gamiz/    |
+| AlexMenor       | https://www.linkedin.com/in/alejandro-menor-molinero-a34595176/        |
