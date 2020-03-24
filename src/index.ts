@@ -8,6 +8,7 @@ import { SCUService } from './controllers/SCUService.interface';
 import { JsonStorage } from './services/JsonStorage.service';
 import { getAllDaysAvailable } from './controllers/extractor';
 import { Extractor } from './controllers/extractor.interface';
+import { FsAdapter } from './services/fs.adapter';
 
 const token: string = process.env.BOT_TOKEN as string;
 
@@ -16,7 +17,8 @@ const bot = new Telegraf(token);
 bot.start(ctx => ctx.reply('Hello world'));
 
 const extractor: Extractor = getAllDaysAvailable;
-const jsonStorage: SCUService = new JsonStorage(extractor);
+const fsAdapter: FsAdapter = new FsAdapter();
+const jsonStorage: SCUService = new JsonStorage(extractor, fsAdapter);
 const scuController: SCUController = new SCUController(jsonStorage);
 
 bot.command('hoy', async ctx =>

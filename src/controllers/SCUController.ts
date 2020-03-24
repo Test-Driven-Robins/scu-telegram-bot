@@ -52,9 +52,12 @@ export class SCUController {
   }
 }
 
-class CouldNotFindDayMenu extends Error {
+export class CouldNotFindDayMenu extends Error {
   constructor() {
     super();
-    this.message = "That day doesn't exist in our databse";
+    this.message = "That day doesn't exist in our database";
+    this.name = 'CouldNotFindDayMenu';
+
+    Object.setPrototypeOf(this, CouldNotFindDayMenu.prototype);
   }
 }

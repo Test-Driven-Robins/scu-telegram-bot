@@ -1,7 +1,7 @@
 import DayMenu from '../models/DayMenu';
 import Dish from '../models/Dish';
 import Menu from '../models/Menu';
-import { SCUController, Weekdays } from '../controllers/SCUController';
+import {CouldNotFindDayMenu, SCUController, Weekdays} from '../controllers/SCUController';
 
 const mockSCUService = {
   async getDayMenu(day: number, month: number, year: number): Promise<DayMenu> {
@@ -28,6 +28,16 @@ it('should return todays menu', async () => {
 
   expect(dayMenu).toEqual(await mockSCUService.getDayMenu(10, 2, 2020));
 });
+
+it('should throw CouldNotFindDayMenu', async () => {
+  jest.spyOn(mockSCUService, 'getDayMenu')
+    .mockImplementation(() => {
+      throw new Error()
+    })
+  const controller = new SCUController(mockSCUService);
+  await expect(controller.getDayMenu(Weekdays.Friday)).rejects.toThrow(CouldNotFindDayMenu)
+  jest.resetAllMocks()
+})
 
 it('should return tomorrows menu', async () => {
   const controller = new SCUController(mockSCUService);

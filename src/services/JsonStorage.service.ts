@@ -1,7 +1,7 @@
 import { SCUService } from '../controllers/SCUService.interface';
-import fs from 'fs';
 import DayMenu from '../models/DayMenu';
 import { Extractor } from '../controllers/extractor.interface';
+import { FsAdapter } from './fs.adapter';
 
 export class JsonStorage implements SCUService {
   private static JSON_FILE = 'menus.json';
@@ -12,13 +12,10 @@ export class JsonStorage implements SCUService {
   private menus: Map<string, DayMenu>;
   constructor(
     private readonly getAllDaysAvailable: Extractor,
+    private readonly fs: FsAdapter,
     private readonly refreshDataPeriodically: boolean = true,
   ) {
-    try {
-      this.initializeService();
-    } catch (err) {
-      throw new InitializationError();
-    }
+    this.initializeService();
   }
 
   async getDayMenu(day: number, month: number, year: number): Promise<DayMenu> {
@@ -60,9 +57,9 @@ export class JsonStorage implements SCUService {
   ): DayMenu | undefined {
     return this.menus.get(this.dateToString(day, month, year));
   }
-  private readMenusFromFile() {
+  private async readMenusFromFile() {
     try {
-      const data = fs.readFileSync(JsonStorage.JSON_FILE);
+      const data = await this.fs.readFromFile(JsonStorage.JSON_FILE);
       const menusAsArray = JSON.parse(data.toString());
       this.menus = this.menuArrayToMap(menusAsArray);
     } catch (err) {
@@ -73,9 +70,11 @@ export class JsonStorage implements SCUService {
   private async writeMenusToFile() {
     const menusAsArray = Array.from(this.menus.values());
     const menuDataString = JSON.stringify(menusAsArray);
-    fs.writeFile(JsonStorage.JSON_FILE, menuDataString, err => {
-      if (err) throw new JSONWriteError();
-    });
+    try {
+      await this.fs.writeToFile(JsonStorage.JSON_FILE, menuDataString);
+    } catch (err) {
+      throw new JSONWriteError();
+    }
   }
 
   private menuArrayToMap(menuArray: DayMenu[]): Map<string, DayMenu> {
@@ -93,11 +92,12 @@ export class JsonStorage implements SCUService {
   }
 }
 
-class JSONReadError extends Error {
+export class JSONReadError extends Error {
   constructor() {
     super();
     this.name = 'JSONReadError';
     this.message = 'Could not read from the menu file';
+    Object.setPrototypeOf(this, JSONReadError.prototype);
   }
 }
 
@@ -110,19 +110,12 @@ export class RefreshError extends Error {
   }
 }
 
-class JSONWriteError extends Error {
+export class JSONWriteError extends Error {
   constructor() {
     super();
     this.name = 'JSONWriteError';
     this.message = 'Could not write the menus in memory to a file';
-  }
-}
-
-class InitializationError extends Error {
-  constructor() {
-    super();
-    this.name = 'InitializationError';
-    this.message = 'Could not initialize the service';
+    Object.setPrototypeOf(this, JSONWriteError.prototype);
   }
 }
 
