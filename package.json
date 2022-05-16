@@ -36,7 +36,7 @@
   "dependencies": {
     "@types/cheerio": "^0.22.16",
     "cheerio": "^1.0.0-rc.3",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "telegraf": "^3.36.0"
   }
 }
